@@ -1,0 +1,123 @@
+= Programming Assignment 1, S2022
+:author: Keith Lancaster, Ph.D.
+:icons: font
+:source-highlighter: rouge
+
+== Getting Started
+
+1.	Accept the assignment invitation. This will create a repository in your account
+2.  Log in to your Github account if you have not already
+3.  Copy the clone URL
+4.  In a terminal on your computer, change directories into a directory where you want to keep your projects
+5.  Type ```git clone ``` and then paste in your clone URL and hit enter. This will create a new directory containing your assignment.
+6.	cd into your new assignment directory
+7.	Complete the assignment as described below.
+
+
+== Grading
+Grading for this assignment is based on the following criteria. Each criteria is graded as _acceptable_ or _revision required_. No partial credit is given. You are allowed one revision after the initial assignment grading. The higher of the two grades will be used as your assignment grade.
+
+[NOTE]
+--
+Your program must compile without errors (criteria &#35;1 below). If compilation fails, the assignment will receive no credit. You will need to submit a revised version that compiles to receive a grade.
+--
+
+|===
+|Criteria|Acceptable Work Means...
+
+|Compilation | The program compiles with no errors.
+|Standard I/O | Program uses `std::cout` and `std::cin` for standard input and output
+|Program Flow | The program must perform operations in the order specified
+|Runtime | The program completes without exiting prematurely due to logic errors
+|Completeness | All required functionality must be present
+|Classes| The refactored code should include correct C++ classes to replace the C code
+|===
+
+== Problem Statement
+You are to take a simple C program and convert it to C++. The finished program must include a makefile that will build an executable program named *gcalc*.
+
+The `main` routine of your finished program should be as shown below:
+
+[source,c]
+----
+int main() {
+	// print program introduction (same as C, but using C++ IO!)
+	// ...
+	//
+	GradeCalculator calculator;
+	int points;
+	for( int i = 0; i < NUM_ASSIGNMENTS; i++ ) {
+	    std::cout << "Enter points for assignment " << i+1 << ": ";
+	    std::cin >> points;
+	    calculator.addPoints(points);
+	}
+	calculator.printResults();
+}
+----
+
+=== The Calculator Class
+
+The GradeCalculator class should
+
+* accept up to 100 scores
+* store the scores in a private array
+
+.Methods
+* *addPoints*: takes a number of points as an integer and stores it in the points array
+* *printResults*: drops the lowest score by calling `dropLowest`, and the prints the total remaining points and average (again, exluding the low score)
+	** example: User enters 1,2,5,6. The routine should print 13 as the total, and 13/3 = 4.33 as the average
+* *dropLowest*: this is an internal function that drops the lowest score. It should be called when the program calls  `printResults`
+
+[WARNING]
+--
+The class methods `printResults` and `dropLowest` should _only_ rely on the array stored in the class. They should take no arguments. You can move the `dropLowest` code from `main` to the class -- just be sure to change its signature.
+--
+
+=== Steps
+
+These are _suggested_ steps. It is strongly recommended that you test and compile often as you are completing the program. This might require writing
+temporary code in the `main` function, for example. There are many steps that are _not_ listed below, such as adding include directives in files.
+
+1. Modify the initial print lines in `main` to use C++ methods instead of `printf`
+
+2. Create the `GradeCalculator`. You should a cpp file called `GradeCalculator.cpp` and a header file called `GradeCalculator.h`
+
+3. Create a makefile that will compile both the `main.cpp` and `GradedCalculator.cpp` files and compile.
+
+4. In the `GradeCalculator` class,
+** Create the required private integer array to hold the scores. You will need to add a counter as well so that you know how many scores have been added.
+
+** Create the `addScore` method, insuring that it both adds the score to the array _and_ increments the counter.
+
+** Create the `printResults` method. This methods call the `dropLowest` method and then print the total and the average.
+
+5. Modify the `main` method to match the source listing provided, and test your application.
+
+6. Review all of your code to make sure you have replaced all IO statements with the correct C++ versions.
+
+7. Check to insure that all your files have been added to git, then commit and push to Github.
+
+[NOTE]
+--
+When your changes are completed, output of the program should be exactly the same as the C version.
+--
+
+
+== Submitting the Assignment
+
+When you are ready, type the following commands:
+```
+git add .
+git commit -m “your commit message”
+git push origin main
+```
+In WebCampus, put your Github username and the clone url (see above) in the text field for the submission and submit your assignment.
+
+== Academic Honesty
+Academic dishonesty is against university as well as the system community standards. Academic dishonesty includes, but is not limited to, the following:
+
+* Plagiarism: defined as submitting the language, ideas, thoughts or work off another as one's own; or assisting in the act of plagiarism by allowing one's work to be used in this fashion.
+
+* Cheating: defined as (1) obtaining or providing unauthorized information during an examination through verbal, visual or unauthorized use of books, notes, text and other materials; (2) obtaining or providing information concerning all or part of an examination prior to that examination; (3) taking an examination for another student, or arranging for another person to take an exam in one's place; (4) altering or changing test answers after submittal for grading, grades after grades have been awarded, or other academic records once these are official.
+
+Cheating, plagiarism or otherwise obtaining grades under false pretenses constitute academic dishonesty according to the code of this university. Academic dishonesty will not be tolerated and penalties can include cancelling a student’s enrollment without a grade, giving an F for the course, or for the assignment. For more details, see the University of Nevada, Reno General Catalog.
