@@ -1,6 +1,3 @@
-run: gcalc
-	./gcalc
-
 gcalc: main.o GradeCalculator.o
 	g++ -o gcalc main.o GradeCalculator.o
 
